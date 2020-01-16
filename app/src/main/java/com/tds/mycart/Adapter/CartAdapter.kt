@@ -3,6 +3,7 @@ package com.tds.mycart.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.view.menu.ActionMenuItemView
@@ -17,6 +18,10 @@ class CartViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     var itemName = itemView.findViewById<TextView>(R.id.txt_item_name)
 
     var itemPrice = itemView.findViewById<TextView>(R.id.txt_item_price)
+
+    var txtKilo = itemView.findViewById<TextView>(R.id.txt_kilo)
+    var btnPlus = itemView.findViewById<Button>(R.id.btn_plus)
+    var btnMinus = itemView.findViewById<Button>(R.id.btn_minus)
 
 }
 
@@ -34,6 +39,21 @@ class CartAdapter (var itemList: ArrayList<Cart>): RecyclerView.Adapter<CartView
         holder.itemImage.setImageResource(itemList[position].itemImage)
         holder.itemName.text = itemList[position].itemName
         holder.itemPrice.text = itemList[position].itemPrice.toString()
+
+        holder.btnPlus.setOnClickListener {
+            var count : Int = holder.txtKilo.text.toString().toInt()
+            count++
+            holder.txtKilo.text = count.toString()
+        }
+
+        holder.btnMinus.setOnClickListener {
+            var count : Int = holder.txtKilo.text.toString().toInt()
+            if(count > 0)
+            {
+                count--
+            }
+            holder.txtKilo.text = count.toString()
+        }
     }
 
 }
